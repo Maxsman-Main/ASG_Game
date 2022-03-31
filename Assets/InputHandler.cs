@@ -22,5 +22,10 @@ public class InputHandler : MonoBehaviour
         {
             _mover.Move(Direction.Left, _actor.Speed, _actor.RigidBody);
         }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            _mover.Jump(_actor.GroundChecker, _actor.RadiusCircleCheckingGround, _actor.CheckedGround, _actor.JumpForce, _actor.RigidBody);
+        }
     }
 }

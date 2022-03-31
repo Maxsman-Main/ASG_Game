@@ -6,7 +6,7 @@ public enum Direction
     Right
 }
 
-public class Mover
+public class Mover : MonoBehaviour
 {
     public void Move(Direction direction, float speed, Rigidbody2D actorRigidbody)
     {
@@ -26,5 +26,17 @@ public class Mover
         }
 
         return Vector2.zero;
+    }
+
+    public void Jump(Transform groundChecker, float radiusCircleChecking, LayerMask Ground, float jumpForce, Rigidbody2D actorRigidbody)
+    {
+        if(CheckGround(groundChecker, radiusCircleChecking, Ground))
+            actorRigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+
+    private bool CheckGround(Transform groundChecker, float radiusCircleChecking, LayerMask Ground)
+    {
+        bool isGrounded = Physics2D.OverlapCircle(groundChecker.position, radiusCircleChecking, Ground);
+        return isGrounded;
     }
 }
